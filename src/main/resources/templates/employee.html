@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Employee:
+<table>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>surname</th>
+        <th>email</th>
+        <th>Company</th>
+        <th>phoneNumber</th>
+        <th>salary</th>
+        <th>position</th>
+        <th>picture</th>
+    </tr>
+
+    <tr th:each="em: ${employees}">
+        <td th:text="${em.id}"></td>
+        <td th:text="${em.name}"></td>
+        <td th:text="${em.surname}"></td>
+        <td th:text="${em.email}"></td>
+        <td th:text="${em.company.name}"></td>
+        <td th:text="${em.phoneNumber}"></td>
+        <td th:text="${em.salary}"></td>
+        <td th:text="${em.position}"></td>
+        <td ><a th:href="@{'/deleteEmployee/' + ${em.id}}">delete</a></td>
+
+    </tr>
+
+</table>
+
+<form action="/addEmployee" method="post">
+    <label>Name:</label><br>
+    <input type="text" name="name"><br>
+    <label>Surname:</label><br>
+    <input type="text" name="surname"><br>
+    <label>Email:</label><br>
+    <input type="text" name="email"><br>
+    <label>PhoneNumber</label><br>
+    <input type="text" name="phoneNumber"><br>
+    <label>Salary:</label><br>
+    <input type="text" name="salary"><br>
+    <label>Position</label><br>
+    <input type="text" name="position"><br>
+    <select name="companyId">
+        <option th:each="company: ${companies}" th:value="${company.id}" th:text="${company.name}"></option>
+    </select>
+    <input type="submit" value="ADD">
+</form>
+
+</body>
+</html>
